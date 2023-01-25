@@ -1,9 +1,34 @@
 package characters.protagonists;
 
+import behaviours.IFight;
 import characters.Character;
+import characters.antagonists.Troll;
+import weapons.WeaponType;
 
-public abstract class Fighter extends Character {
-    public Fighter(String name, int healthPoints) {
-        super(name, healthPoints);
+
+
+public class Fighter extends Character implements IFight {
+
+
+    private final WeaponType weaponType;
+
+    public Fighter(String name,  WeaponType weaponType) {
+        super(name);
+        this.weaponType = weaponType;
+    }
+
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
+
+
+    public int dealDamage() {
+        return this.weaponType.getDamagePoints();
+    }
+
+
+    public void receiveDamage(int point) {
+        int i = this.getHealthPoints() - point;
+        setHealthPoints(i);
     }
 }
